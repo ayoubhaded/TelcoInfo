@@ -1,20 +1,12 @@
-# Utiliser une image de base officielle Node.js
-FROM node:18
+# Utiliser une image Nginx comme base
+FROM nginx:alpine
 
-# Créer un répertoire de travail
-WORKDIR /app
+# Copier les fichiers du projet dans le répertoire où Nginx servira les fichiers
+COPY . /usr/share/nginx/html
 
-# Copier le fichier package.json et package-lock.json (si disponible)
-COPY package*.json ./
+# Exposer le port 80 pour que l'application soit accessible
+EXPOSE 80
 
-# Installer les dépendances
-RUN npm install
+# Commande par défaut pour démarrer Nginx
+CMD ["nginx", "-g", "daemon off;"]
 
-# Copier le reste des fichiers de votre projet
-COPY . .
-
-# Exposer le port sur lequel l'application fonctionne
-EXPOSE 3000
-
-# Commande pour démarrer l'application
-CMD ["npm", "start"]

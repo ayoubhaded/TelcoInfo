@@ -1,0 +1,264 @@
+/* Style général */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Mode sombre */
+.dark-mode {
+    background-color: #222;
+    color: white;}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    padding: 20px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    width: 120px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ff9800;
+}
+
+button {
+    padding: 10px 20px;
+    background: #ff9800;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: background 0.3s;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #e68900;
+}
+
+/* Offres et Réclamation */
+.offers, .intro, .reclamation-form {
+    padding: 20px;
+}
+/* Image de bannière dans la section des offres */
+.offer-banner {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.offers-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.offer-card {
+    background: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: left;
+    transition: box-shadow 0.3s ease;
+}
+
+.offer-card:hover {
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.reclamation-form form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reclamation-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.reclamation-form label {
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.reclamation-form input, .reclamation-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.reclamation-form button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    background-color: #0078d7;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.reclamation-form button:hover {
+    background-color: #005fa3;
+}
+
+/* Footer */
+footer {
+    background: #1e3c72;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .offer-card {
+        width: 90%;
+        margin: 10px 0;
+    }
+
+    .reclamation-form form {
+        width: 90%;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 0.9rem;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    .offer-card {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .reclamation-form input, .reclamation-form textarea {
+        font-size: 0.9rem;
+    }
+
+    .reclamation-form button {
+        font-size: 0.9rem;
+    }
+
+    footer p {
+        font-size: 0.8rem;
+    }
+}
+/* Section des offres */
+.offers {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrer horizontalement */
+    justify-content: center; /* Centrer verticalement */
+    text-align: center;
+}
+
+.offer-banner {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Conteneur des offres */
+#offers-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrer les cartes des offres horizontalement */
+    gap: 20px;
+}
+
+/* Carte d'offre */
+.offer-card {
+    background: white;
+    padding: 15px;
+    width: 250px; /* Contrôler la largeur de chaque carte */
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Aligner le texte à gauche à l'intérieur des cartes */
+}
+
+.offer-card h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.offer-card p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.offer-card strong {
+    font-weight: bold;
+}

@@ -1,21 +1,24 @@
-# Utilisation de l'image officielle Nginx basée sur Alpine (légère et sécurisée)
-FROM nginx:alpine
 
-# Définir le répertoire de travail
+FROM nginx:alpine
+FROM alpine:3.21.3
+
 WORKDIR /usr/share/nginx/html
 
-# Copier uniquement les fichiers nécessaires pour éviter d'inclure des fichiers temporaires
-COPY . .
+COPY index.html /usr/share/nginx/html/
+COPY offres.html /usr/share/nginx/html/
+COPY reclamation.html /usr/share/nginx/html/
+COPY script.js /usr/share/nginx/html/
+COPY styles.css /usr/share/nginx/html/
 
-# Assurer que Nginx ne fonctionne pas en tant que root pour des raisons de sécurité
+
+RUN apk update && apk upgrade
+
 RUN chown -R nginx:nginx /usr/share/nginx/html
 
-# Passer à l'utilisateur non-root pour limiter les privilèges
+
 USER nginx
 
-# Exposer le port 80 pour permettre l'accès HTTP
 EXPOSE 80
 
-# Commande par défaut pour démarrer Nginx
 CMD ["nginx", "-g", "daemon off;"]
 

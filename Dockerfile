@@ -1,10 +1,19 @@
-# Utiliser une image Nginx comme base
+# Utilisation de l'image officielle Nginx basée sur Alpine (légère et sécurisée)
 FROM nginx:alpine
 
-# Copier les fichiers du projet dans le répertoire où Nginx servira les fichiers
-COPY . /usr/share/nginx/html
+# Définir le répertoire de travail
+WORKDIR /usr/share/nginx/html
 
-# Exposer le port 80 pour que l'application soit accessible
+# Copier uniquement les fichiers nécessaires pour éviter d'inclure des fichiers temporaires
+COPY . .
+
+# Assurer que Nginx ne fonctionne pas en tant que root pour des raisons de sécurité
+RUN chown -R nginx:nginx /usr/share/nginx/html
+
+# Passer à l'utilisateur non-root pour limiter les privilèges
+USER nginx
+
+# Exposer le port 80 pour permettre l'accès HTTP
 EXPOSE 80
 
 # Commande par défaut pour démarrer Nginx

@@ -1,0 +1,18 @@
+# Ignorer les dépendances des projets Node.js et Python
+node_modules/
+venv/
+__pycache__/
+
+# Ignorer les fichiers système et de versioning
+.git/
+.gitignore
+.DS_Store
+
+# Ignorer les fichiers temporaires et logs
+
+*.swp
+.env
+
+# Ignorer les fichiers Docker inutiles
+Dockerfile
+.dockerignore

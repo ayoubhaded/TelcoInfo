@@ -1,5 +1,3 @@
-
-FROM nginx:alpine
 FROM alpine:3.21.3
 
 WORKDIR /usr/share/nginx/html

@@ -7,6 +7,7 @@ pipeline {
     stage('Checkout') {
       steps {
         git branch: 'main', url: 'https://github.com/ayoubhaded/TelcoInfo.git'
+        sh 'ls -la'  // Lister les fichiers pour vérifier si le répertoire demo-java-app est présent
       }
     }
 
@@ -22,4 +23,3 @@ pipeline {
     }
   }
 }
-

@@ -1,25 +1,53 @@
 pipeline {
-  agent any
-  parameters {
-    string(name: 'build_version', defaultValue: 'V1.0', description: 'Build version to use for Docker image')
-  }
-  stages {
-    stage('Checkout') {
-      steps {
-        git branch: 'main', url: 'https://github.com/ayoubhaded/TelcoInfo.git'
-        sh 'ls -la'  // Liste les fichiers clonés pour vérifier si le répertoire demo-java-app est présent
-      }
+    agent any
+    parameters {
+        string(name: 'build_version', defaultValue: 'V1.0', description: 'Build version to use for Docker image')
     }
+    environment {
+        SONAR_URL = "http://sonarqube:9000"  // URL de ton serveur SonarQube
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Cloner le dépôt depuis Git
+                git branch: 'main', url: 'https://github.com/ayoubhaded/TelcoInfo.git'
 
-    stage('Static Code Analysis') {
-      environment {
-        SONAR_URL = "http://sonarqube:9000"
-      }
-      steps {
-        withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd demo-java-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+                // Lister les fichiers clonés pour vérifier la présence du répertoire demo-java-app
+                sh 'ls -la'
+            }
         }
-      }
+
+        stage('Verify demo-java-app directory') {
+            steps {
+                script {
+                    // Vérifier si le répertoire demo-java-app existe
+                    def dirExists = fileExists('demo-java-app')
+                    if (!dirExists) {
+                        error 'Le répertoire demo-java-app n\'existe pas dans le dépôt cloné.'
+                    }
+                }
+            }
+        }
+
+        stage('Static Code Analysis') {
+            steps {
+                // Exécuter l'analyse statique avec SonarQube
+                withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_AUTH_TOKEN')]) {
+                    sh 'cd demo-java-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+                }
+            }
+        }
     }
-  }
+    post {
+        always {
+            // Optionnel : Actions post-build comme nettoyer les ressources
+            echo 'Pipeline terminé.'
+        }
+        success {
+            echo 'Pipeline exécuté avec succès.'
+        }
+        failure {
+            echo 'La pipeline a échoué.'
+        }
+    }
 }

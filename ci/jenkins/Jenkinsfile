@@ -9,8 +9,7 @@ pipeline {
         git branch: 'main', url: 'https://github.com/ayoubhaded/TelcoInfo.git'
       }
     }
-    
-    }
+
     stage('Static Code Analysis') {
       environment {
         SONAR_URL = "http://sonarqube:9000"
@@ -20,4 +19,7 @@ pipeline {
           sh 'cd demo-java-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
-    } }
+    }
+  }
+}
+
